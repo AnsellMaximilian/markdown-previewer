@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
+
+import Editor from './components/Editor';
+import Preview from './components/Preview';
+
+import defaultMarkdown from './data/defaultMarkdown';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      markdown: defaultMarkdown,
+    }
+  }
+
+  updateMarkdown = (markdown) => {
+    this.setState({
+      markdown: markdown
+    })
+  }
+
+  render(){
+    
+    return (
+      <div className="App" >
+        <h1>Markdown Previewer</h1>
+        <Editor updateMarkdown={this.updateMarkdown}/>
+        <Preview markdown={this.state.markdown}/>
+        
+      </div>
+    );
+  }
 }
 
 export default App;
